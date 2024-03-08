@@ -1,38 +1,26 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../data/model/university_info.dart';
+import '../data/model/vending_machine.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
-class UniversityPreferences {
-  static const _keyUniversity = 'university';
-  static const _keyUniversities = 'universities';
+class SharedPreferencesService {
+  static const String _vendingMachineKey = 'vending_machine';
 
-  Future<void> saveUniversity(UniversityInfo universityInfo) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String universityJson = jsonEncode(universityInfo.toJson());
-    await prefs.setString(_keyUniversity, universityJson);
+  Future<void> saveVendingMachine(VendingMachine vendingMachine) async {
+    final prefs = await SharedPreferences.getInstance();
+    final vendingMachineJson = jsonEncode(vendingMachine.toJson());
+    await prefs.setString(_vendingMachineKey, vendingMachineJson);
   }
 
-  Future<UniversityInfo?> loadUniversity() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? universityJson = prefs.getString(_keyUniversity);
-    if (universityJson == null) return null;
-    return UniversityInfo.fromJson(jsonDecode(universityJson));
-  }
-
-  Future<void> saveUniversityList(List<UniversityInfo> universities) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> universityJsonList =
-        universities.map((uni) => jsonEncode(uni.toJson())).toList();
-    await prefs.setStringList(_keyUniversities, universityJsonList);
-  }
-
-  Future<List<UniversityInfo>> loadUniversityList() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? universityJsonList = prefs.getStringList(_keyUniversities);
-    if (universityJsonList == null) return [];
-    return universityJsonList
-        .map((uniJson) => UniversityInfo.fromJson(jsonDecode(uniJson)))
-        .toList();
+  Future<VendingMachine?> getVendingMachine() async {
+    final prefs = await SharedPreferences.getInstance();
+    final vendingMachineJson = prefs.getString(_vendingMachineKey);
+    if (vendingMachineJson != null) {
+      final vendingMachineMap = jsonDecode(vendingMachineJson);
+      return VendingMachine.fromJson(vendingMachineMap);
+    }
+    return null;
   }
 }

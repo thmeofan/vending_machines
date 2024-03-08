@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../blocs/onboarding_cubit/onboarding_cubit.dart';
 import '../data/repository/onboarding_repository.dart';
-import '../views/home/views/home_screen.dart';
+import '../views/homescreen/views/home_screen.dart';
 import '../views/onboarding/view/onboarding_screen.dart';
 import '../views/settings/views/settings_screen.dart';
 

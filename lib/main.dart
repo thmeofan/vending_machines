@@ -1,7 +1,10 @@
-import 'package:education_app/util/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vending_machines/util/app_routes.dart';
+import 'package:vending_machines/util/shared_pref_service.dart';
 
+import 'blocs/vending_machine_cubit/vending_machine_cubit.dart';
 import 'data/repository/onboarding_repository.dart';
 
 Future<void> main() async {
@@ -22,10 +25,13 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.deepPurple),
-      onGenerateRoute: AppRoutes.onGenerateRoute,
-      initialRoute: isFirstLaunch ? AppRoutes.welcome : AppRoutes.home,
+    return BlocProvider(
+      create: (context) => VendingMachineCubit(SharedPreferencesService()),
+      child: MaterialApp(
+        theme: ThemeData(primarySwatch: Colors.deepPurple),
+        onGenerateRoute: AppRoutes.onGenerateRoute,
+        initialRoute: isFirstLaunch ? AppRoutes.welcome : AppRoutes.home,
+      ),
     );
   }
 }
