@@ -40,6 +40,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         _showMachines = true;
                       });
                     },
+                    style: _showMachines
+                        ? ElevatedButton.styleFrom(primary: Colors.blue)
+                        : null,
                     child: const Text('Machines'),
                   ),
                   const SizedBox(width: 16.0),
@@ -49,6 +52,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         _showMachines = false;
                       });
                     },
+                    style: !_showMachines
+                        ? ElevatedButton.styleFrom(primary: Colors.blue)
+                        : null,
                     child: const Text('Products'),
                   ),
                 ],

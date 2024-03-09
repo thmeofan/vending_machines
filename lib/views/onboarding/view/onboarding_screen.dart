@@ -39,38 +39,24 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      //  extendBodyBehindAppBar: true,
+      extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.transparent,
       ),
       body: Container(
-        color: Colors.black,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/background.png'),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+              Colors.transparent.withOpacity(1),
+              BlendMode.dstATop,
+            ),
+          ),
+        ),
         child: Column(
           children: [
-            Expanded(
-              child: CarouselSlider(
-                items: const [
-                  IntroductionWidget(
-                    imagePath: 'assets/images/onboarding1.svg',
-                  ),
-                  IntroductionWidget(
-                    imagePath: 'assets/images/onboarding2.svg',
-                  ),
-                ],
-                carouselController: _carouselController,
-                options: CarouselOptions(
-                  height: size.height * 0.6,
-                  autoPlay: false,
-                  viewportFraction: 1,
-                  onPageChanged: (index, reason) {
-                    setState(() {
-                      _current = index;
-                    });
-                  },
-                ),
-              ),
-            ),
             Container(
               decoration: const BoxDecoration(
                   //   color: AppColors.blackColor,
