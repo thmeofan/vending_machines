@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vending_machines/views/app/widgets/chosen_action_button_widget.dart';
-import 'package:vending_machines/views/homescreen/views/product_details_screen.dart';
+import 'package:vending_machines/views/homescreen/views/product_screen.dart';
 import 'package:vending_machines/views/homescreen/widgets/banner_widget.dart';
 
 import '../../../blocs/vending_machine_cubit/vending_machine_cubit.dart';
@@ -156,7 +156,9 @@ class _HomeScreenState extends State<HomeScreen> {
               context,
               MaterialPageRoute(
                 builder: (_) => MachineDetailsScreen(
-                    vendingMachine: vendingMachines[index]),
+                    vendingMachine: vendingMachines[index],
+                    product: vendingMachines
+                        .expand((machine) => machine.products) as Product),
               ),
             );
           },
