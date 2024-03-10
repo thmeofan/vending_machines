@@ -20,20 +20,17 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  final CarouselController _carouselController = CarouselController();
-  int _current = 0;
-
-  void _onActionButtonTap() {
-    if (_current == 0) {
-      _carouselController.nextPage(
-        duration: Duration(milliseconds: 300),
-        curve: Curves.linear,
-      );
-    } else {
-      context.read<OnboardingCubit>().setFirstTime();
-      Navigator.pushReplacementNamed(context, AppRoutes.home);
-    }
-  }
+  // void _onActionButtonTap() {
+  //   if (_current == 0) {
+  //     _carouselController.nextPage(
+  //       duration: Duration(milliseconds: 300),
+  //       curve: Curves.linear,
+  //     );
+  //   } else {
+  //     context.read<OnboardingCubit>().setFirstTime();
+  //     Navigator.pushReplacementNamed(context, AppRoutes.home);
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -55,58 +52,40 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             ),
           ),
         ),
-        child: Column(
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                  //   color: AppColors.blackColor,
-                  borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(10),
-                topRight: Radius.circular(10),
-              )),
-              width: double.infinity,
-              height: size.height * 0.5,
-              child: Padding(
-                padding: EdgeInsets.all(size.height * 0.02),
+        child: Padding(
+          padding: EdgeInsets.all(size.height * 0.02),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(
+                // Wrap the Column with Expanded
                 child: Column(
                   children: [
                     SizedBox(
-                      height: size.height * 0.01,
+                      height: size.height * 0.55,
                     ),
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            _current == 0
-                                ? 'Add the appropriate educational institutions'
-                                : 'Choose the most suitable university',
-                            style: OnboardingTextStyle.introduction,
-                            textAlign: TextAlign.center,
-                            softWrap: true,
-                            overflow: TextOverflow.visible,
-                          ),
-                        ),
-                      ],
+                    const Text(
+                      'Welcome to Profitmate - your assistant in increasing the profitability of vending machines!',
+                      style: OnboardingTextStyle.introduction,
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                      overflow: TextOverflow.visible,
                     ),
                     SizedBox(
                       height: size.height * 0.025,
                     ),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      Flexible(
-                        child: Text(
-                          _current == 0
-                              ? 'Add the universities that interest you for admission and highlight key information about them.'
-                              : 'Analyze the conditions of all universities and choose the most suitable option for you.',
-                          style: OnboardingTextStyle.description,
-                          textAlign: TextAlign.center,
-                          softWrap: true,
-                          overflow: TextOverflow.visible,
-                        ),
-                      ),
-                    ]),
-                    const Spacer(),
+                    Text(
+                      'Track, analyze, and optimize your business with our convenient app',
+                      style: OnboardingTextStyle.description,
+                      textAlign: TextAlign.center,
+                      softWrap: true,
+                      overflow: TextOverflow.visible,
+                    ),
+                    Spacer(),
                     ChosenActionButton(
-                      onTap: _onActionButtonTap,
+                      onTap: () {
+                        Navigator.of(context).pushNamed(AppRoutes.start);
+                      },
                       text: 'Next',
                     ),
                     SizedBox(
@@ -114,9 +93,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     ),
                   ],
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

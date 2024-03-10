@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../consts/app_colors.dart';
+import '../../../consts/app_text_styles/onboarding_text_style.dart';
 
 class ChosenActionButton extends StatelessWidget {
   const ChosenActionButton(
@@ -33,7 +34,7 @@ class ChosenActionButton extends StatelessWidget {
           ),
           child: Text(
             text,
-            // style: OnboardingTextStyle.screenTitle,
+            style: OnboardingTextStyle.button,
           ),
         ),
       ),

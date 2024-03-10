@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:vending_machines/consts/app_colors.dart';
+import 'package:vending_machines/views/app/widgets/chosen_action_button_widget.dart';
+import 'package:vending_machines/views/app/widgets/input_widget.dart';
 import 'package:vending_machines/views/machines/views/type_screen.dart';
 
 import '../../../blocs/vending_machine_cubit/vending_machine_cubit.dart';
+import '../../../consts/app_text_styles/constructor_text_style.dart';
+import '../../../data/model/vending_machine.dart';
 
 class BasicInfoScreen extends StatefulWidget {
   const BasicInfoScreen({Key? key}) : super(key: key);
@@ -19,48 +25,90 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
   void initState() {
     super.initState();
     final vendingMachine = context.read<VendingMachineCubit>().state;
-    _nameController.text = vendingMachine?.name ?? '';
-    _locationController.text = vendingMachine?.location ?? '';
+    // _nameController.text = vendingMachine?.name ?? '';
+    // _locationController.text = vendingMachine?.location ?? '';
+  }
+
+  void _clearControllers() {
+    _nameController.clear();
+    _locationController.clear();
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _locationController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: const Text('Basic Information'),
+        backgroundColor: AppColors.purpleColor,
+        title: const Text(
+          'Back',
+          style: ConstructorTextStyle.appBar,
+        ),
+        titleSpacing: -5,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: SvgPicture.asset('assets/icons/leading.svg'),
+        ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: _nameController,
-              decoration: const InputDecoration(
+      body: Container(
+        color: AppColors.purpleColor,
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              InputWidget(
+                controller: _nameController,
                 labelText: 'Name',
               ),
-            ),
-            const SizedBox(height: 16.0),
-            TextField(
-              controller: _locationController,
-              decoration: const InputDecoration(
+              const SizedBox(height: 16.0),
+              InputWidget(
+                controller: _locationController,
                 labelText: 'Location',
               ),
-            ),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                context.read<VendingMachineCubit>().updateBasicInfo(
-                      _nameController.text,
-                      _locationController.text,
+              Spacer(),
+              ChosenActionButton(
+                text: 'Next',
+                onTap: () {
+                  if (_nameController.text.isNotEmpty &&
+                      _locationController.text.isNotEmpty) {
+                    final newVendingMachine = VendingMachine(
+                      name: _nameController.text,
+                      location: _locationController.text,
+                      machineTypes: [],
+                      products: [],
                     );
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const TypeScreen()),
-                );
-              },
-              child: const Text('Next'),
-            ),
-          ],
+                    context
+                        .read<VendingMachineCubit>()
+                        .addVendingMachine(newVendingMachine);
+                    _clearControllers();
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const TypeScreen()),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          'Please fill in all the fields before continuing.',
+                          style: ConstructorTextStyle.snackBar,
+                        ),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

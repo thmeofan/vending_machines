@@ -3,54 +3,30 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../data/model/vending_machine.dart';
 import '../../util/shared_pref_service.dart';
 
-class VendingMachineCubit extends Cubit<VendingMachine?> {
+class VendingMachineCubit extends Cubit<List<VendingMachine>> {
   final SharedPreferencesService _sharedPreferencesService;
 
-  VendingMachineCubit(this._sharedPreferencesService) : super(null) {
-    _loadVendingMachine();
+  VendingMachineCubit(this._sharedPreferencesService) : super([]) {
+    _loadVendingMachines();
   }
 
-  void _loadVendingMachine() async {
-    final vendingMachine = await _sharedPreferencesService.getVendingMachine();
-    emit(vendingMachine);
+  void _loadVendingMachines() async {
+    final vendingMachines =
+        await _sharedPreferencesService.getVendingMachines();
+    emit(vendingMachines);
   }
 
-  void updateBasicInfo(String name, String location) {
-    final updatedVendingMachine = state?.copyWith(
-          name: name,
-          location: location,
-        ) ??
-        VendingMachine(
-          name: name,
-          location: location,
-        );
-    emit(updatedVendingMachine);
-    _saveVendingMachine(updatedVendingMachine);
+  void addVendingMachine(VendingMachine vendingMachine) async {
+    final List<VendingMachine> updatedList = List.from(state)
+      ..add(vendingMachine);
+    emit(updatedList);
+    await _sharedPreferencesService.saveVendingMachines(updatedList);
   }
 
-  void updateMachineTypes(List<MachineType> machineTypes) {
-    final updatedVendingMachine = state?.copyWith(
-          machineTypes: machineTypes,
-        ) ??
-        VendingMachine(
-          machineTypes: machineTypes,
-        );
-    emit(updatedVendingMachine);
-    _saveVendingMachine(updatedVendingMachine);
+  void updateVendingMachinesList(List<VendingMachine> updatedList) async {
+    emit(updatedList);
+    await _sharedPreferencesService.saveVendingMachines(updatedList);
   }
 
-  void addProduct(Product product) {
-    final updatedVendingMachine = state?.copyWith(
-          products: [...?state?.products, product],
-        ) ??
-        VendingMachine(
-          products: [product],
-        );
-    emit(updatedVendingMachine);
-    _saveVendingMachine(updatedVendingMachine);
-  }
-
-  Future<void> _saveVendingMachine(VendingMachine vendingMachine) async {
-    await _sharedPreferencesService.saveVendingMachine(vendingMachine);
-  }
+// Modify other methods to work with a list of vending machines if necessary.
 }

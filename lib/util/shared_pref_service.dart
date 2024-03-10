@@ -6,21 +6,24 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 class SharedPreferencesService {
-  static const String _vendingMachineKey = 'vending_machine';
+  static const String _vendingMachinesKey = 'vending_machines';
 
-  Future<void> saveVendingMachine(VendingMachine vendingMachine) async {
+  Future<void> saveVendingMachines(List<VendingMachine> vendingMachines) async {
     final prefs = await SharedPreferences.getInstance();
-    final vendingMachineJson = jsonEncode(vendingMachine.toJson());
-    await prefs.setString(_vendingMachineKey, vendingMachineJson);
+    final vendingMachinesJson =
+        jsonEncode(vendingMachines.map((vm) => vm.toJson()).toList());
+    await prefs.setString(_vendingMachinesKey, vendingMachinesJson);
   }
 
-  Future<VendingMachine?> getVendingMachine() async {
+  Future<List<VendingMachine>> getVendingMachines() async {
     final prefs = await SharedPreferences.getInstance();
-    final vendingMachineJson = prefs.getString(_vendingMachineKey);
-    if (vendingMachineJson != null) {
-      final vendingMachineMap = jsonDecode(vendingMachineJson);
-      return VendingMachine.fromJson(vendingMachineMap);
+    final vendingMachinesJson = prefs.getString(_vendingMachinesKey);
+    if (vendingMachinesJson != null) {
+      final List<dynamic> vendingMachinesList = jsonDecode(vendingMachinesJson);
+      return vendingMachinesList
+          .map((json) => VendingMachine.fromJson(json))
+          .toList();
     }
-    return null;
+    return [];
   }
 }

@@ -5,11 +5,13 @@ import '../blocs/onboarding_cubit/onboarding_cubit.dart';
 import '../data/repository/onboarding_repository.dart';
 import '../views/homescreen/views/home_screen.dart';
 import '../views/onboarding/view/onboarding_screen.dart';
+import '../views/onboarding/view/start_screen.dart';
 import '../views/settings/views/settings_screen.dart';
 
 abstract class AppRoutes {
   static const home = 'home';
   static const welcome = 'welcome';
+  static const start = 'start';
   static const profile = 'profile';
 
   static MaterialPageRoute onGenerateRoute(RouteSettings settings) {
@@ -21,6 +23,9 @@ abstract class AppRoutes {
     switch (settings.name) {
       case home:
         child = HomeScreen();
+      case start:
+        child = BlocProvider(
+            create: (context) => onboardingCubit, child: const StartScreen());
       case profile:
         child = const SettingsScreen();
       default:
