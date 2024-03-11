@@ -139,7 +139,7 @@ class _TypeScreenState extends State<TypeScreen> {
             decoration: BoxDecoration(
               color: isSelected
                   ? AppColors.greenColor
-                  : Colors.white.withOpacity(0.3),
+                  : Colors.white.withOpacity(0.15),
               borderRadius: BorderRadius.circular(8.0),
             ),
             padding: EdgeInsets.all(4.0),
@@ -152,8 +152,8 @@ class _TypeScreenState extends State<TypeScreen> {
                     Text(
                       machineType.name.toUpperCase(),
                       style: TextStyle(
-                        color: isSelected ? Colors.white : Colors.black,
-                        fontWeight: FontWeight.bold,
+                        color: isSelected ? Colors.white : Colors.white,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                     SizedBox(height: size.width * 0.01),

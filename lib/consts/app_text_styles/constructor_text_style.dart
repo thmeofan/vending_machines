@@ -4,54 +4,48 @@ import '../app_colors.dart';
 
 class ConstructorTextStyle {
   static const TextStyle title = TextStyle(
-    fontFamily: 'Inter',
-    fontSize: 24.0,
+    fontFamily: 'Roboto',
+    fontSize: 18.0,
     color: Colors.white,
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w500,
   );
   static TextStyle subtitle = const TextStyle(
-      fontFamily: 'Inter',
+      fontFamily: 'Roboto',
       fontSize: 18.0,
       fontWeight: FontWeight.w500,
       color: AppColors.greyColor);
 
-  static const TextStyle rating = TextStyle(
-    fontFamily: 'Inter',
-    fontSize: 18.0,
-    fontWeight: FontWeight.w500,
-    color: Colors.white,
-  );
   static const TextStyle inputText = TextStyle(
-      fontFamily: 'Inter',
-      fontSize: 14.0,
-      fontWeight: FontWeight.w400,
+      fontFamily: 'Roboto',
+      fontSize: 16.0,
+      fontWeight: FontWeight.w300,
       color: Colors.white);
   static const TextStyle appBar = TextStyle(
-      fontFamily: 'Inter',
+      fontFamily: 'Roboto',
       fontSize: 16.0,
       fontWeight: FontWeight.w400,
       color: AppColors.greenColor);
 
   static const TextStyle add = TextStyle(
-      fontFamily: 'Inter',
+      fontFamily: 'Roboto',
       fontSize: 16.0,
       fontWeight: FontWeight.w300,
       color: AppColors.greenColor);
 
   static const TextStyle lable = TextStyle(
-    fontFamily: 'Inter',
-    fontSize: 18.0,
-    fontWeight: FontWeight.w500,
-    color: AppColors.greyColor,
+    fontFamily: 'Roboto',
+    fontSize: 16.0,
+    fontWeight: FontWeight.w400,
+    color: Colors.grey,
   );
   static TextStyle priority = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: 'Roboto',
     fontSize: 14.0,
     fontWeight: FontWeight.w400,
     color: Colors.white,
   );
   static TextStyle snackBar = TextStyle(
-    fontFamily: 'Inter',
+    fontFamily: 'Roboto',
     fontSize: 14.0,
     fontWeight: FontWeight.w400,
     color: AppColors.greenColor,

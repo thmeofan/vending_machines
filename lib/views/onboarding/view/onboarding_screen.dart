@@ -67,7 +67,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     const Text(
                       'Welcome to Profitmate - your assistant in increasing the profitability of vending machines!',
                       style: OnboardingTextStyle.introduction,
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
                       softWrap: true,
                       overflow: TextOverflow.visible,
                     ),
@@ -77,7 +77,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     Text(
                       'Track, analyze, and optimize your business with our convenient app',
                       style: OnboardingTextStyle.description,
-                      textAlign: TextAlign.center,
+                      textAlign: TextAlign.start,
                       softWrap: true,
                       overflow: TextOverflow.visible,
                     ),

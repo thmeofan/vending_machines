@@ -12,14 +12,20 @@ class OutputWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
+      width: double.infinity,
+      height: size.height * 0.05,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
-        color: Colors.white.withOpacity(0.2),
+        borderRadius: BorderRadius.all(Radius.circular(10)),
+        color: Colors.white.withOpacity(0.15),
       ),
-      child: Text(
-        text,
-        style: ConstructorTextStyle.inputText,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          text,
+          style: ConstructorTextStyle.inputText,
+        ),
       ),
     );
   }

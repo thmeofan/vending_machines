@@ -7,11 +7,23 @@ class OnboardingTextStyle {
     color: Colors.white,
     fontWeight: FontWeight.w600,
   );
-  static TextStyle description = const TextStyle(
+  static TextStyle description = TextStyle(
     fontFamily: 'Roboto',
     fontSize: 14.0,
     fontWeight: FontWeight.w600,
+    color: Colors.grey,
+  );
+  static const TextStyle title = TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 18.0,
     color: Colors.white,
+    fontWeight: FontWeight.w600,
+  );
+  static const TextStyle subtitle = TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 14.0,
+    color: Colors.white,
+    fontWeight: FontWeight.w300,
   );
   static const TextStyle button = TextStyle(
     fontFamily: 'Roboto',

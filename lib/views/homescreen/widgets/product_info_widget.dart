@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:vending_machines/consts/app_colors.dart';
+import 'package:vending_machines/consts/app_text_styles/constructor_text_style.dart';
+import 'package:vending_machines/consts/app_text_styles/home_screen_text_style.dart';
 
-import '../../../data/model/vending_machine.dart'; // Import your models here
+import '../../../data/model/vending_machine.dart';
+import '../../app/widgets/output_widget.dart'; // Import your models here
 
 class ProductInfoWidget extends StatelessWidget {
   final Product product;
@@ -14,12 +18,14 @@ class ProductInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
-      width: MediaQuery.of(context).size.width * 0.3,
+      height: MediaQuery.of(context).size.height * 0.3,
+      width: double.infinity,
       padding: EdgeInsets.all(16.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12.0),
-        color: Colors.grey[200],
+        color: Colors.white.withOpacity(0.15),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -27,38 +33,106 @@ class ProductInfoWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                product.name,
-                style: TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
+              Text(product.name, style: HomeScreenTextStyle.name),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  color: AppColors.greenColor.withOpacity(0.2),
                 ),
-              ),
-              Text(
-                vendingMachine.machineTypes.first.name,
-                style: TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.grey,
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4),
+                  child: Text(
+                    vendingMachine.machineTypes.first.name,
+                    style: HomeScreenTextStyle.type,
+                  ),
                 ),
               ),
             ],
           ),
-          SizedBox(height: 10.0),
-          Text(
-            'Price: ${product.price}',
-            style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 10.0),
+          SizedBox(height: size.height * 0.015),
+          Container(
+              width: double.infinity,
+              height: size.height * 0.05,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                color: AppColors.greenColor.withOpacity(0.2),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      'Price per thing',
+                      style: HomeScreenTextStyle.location,
+                    ),
+                    Spacer(),
+                    Text(
+                      product.price.toString(),
+                      style: HomeScreenTextStyle.type,
+                    )
+                  ],
+                ),
+              )),
+          SizedBox(height: size.height * 0.015),
           Row(
             children: [
-              Icon(Icons.access_time),
-              SizedBox(width: 5.0),
-              Text(
-                'Renew: ${_calculateRenewDate()}',
-                style: TextStyle(fontSize: 14.0),
+              Container(
+                //  width: double.infinity,
+                height: size.height * 0.13,
+                width: size.width * 0.38,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  color: Colors.white.withOpacity(0.15),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Restock:',
+                        style: ConstructorTextStyle.inputText,
+                      ),
+                      SizedBox(
+                        height: size.height * 0.05,
+                      ),
+                      Text('${_calculateRenewDate()}',
+                          style: HomeScreenTextStyle.restock)
+                    ],
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: size.width * 0.05,
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  color: Colors.white.withOpacity(0.15),
+                ),
+                //  width: double.infinity,
+                height: size.height * 0.13,
+                width: size.width * 0.38,
+                child: Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Consumption',
+                        style: ConstructorTextStyle.inputText,
+                      ),
+                      SizedBox(
+                        height: size.height * 0.05,
+                      ),
+                      Text(
+                        ' ${product.consumption}/week',
+                        style: HomeScreenTextStyle.restock,
+                      )
+                    ],
+                  ),
+                ),
               ),
             ],
           ),

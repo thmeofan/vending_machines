@@ -115,9 +115,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               InputWidget(
                 controller: _consumptionController,
                 labelText: 'Consumption',
+                keyboardType: TextInputType.number,
               ),
               const SizedBox(height: 16.0),
-              const Text('Consumption Period:'),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Consumption Period:',
+                    style: ConstructorTextStyle.title,
+                  ),
+                ],
+              ),
               const SizedBox(height: 8.0),
               Row(
                 children: [
@@ -197,7 +206,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             decoration: BoxDecoration(
               color: isSelected
                   ? AppColors.greenColor
-                  : Colors.white.withOpacity(0.3),
+                  : Colors.white.withOpacity(0.15),
               borderRadius: BorderRadius.circular(8.0),
             ),
             padding: EdgeInsets.all(4.0),
@@ -210,8 +219,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     Text(
                       consumptionPeriod.name.toUpperCase(),
                       style: TextStyle(
-                        color: isSelected ? Colors.white : Colors.black,
-                        fontWeight: FontWeight.bold,
+                        color: isSelected ? Colors.white : Colors.white,
+                        fontWeight: FontWeight.w400,
                       ),
                     ),
                     SizedBox(height: size.width * 0.01),

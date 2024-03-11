@@ -27,9 +27,9 @@ class InputWidget extends StatelessWidget {
         keyboardType: keyboardType,
         decoration: InputDecoration(
           filled: true,
-          fillColor: Colors.white.withOpacity(0.2),
+          fillColor: Colors.white.withOpacity(0.15),
           labelText: labelText,
-          // labelStyle: ConstructorTextStyle.hintText,
+          labelStyle: ConstructorTextStyle.lable,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15.0),
             borderSide: BorderSide.none,

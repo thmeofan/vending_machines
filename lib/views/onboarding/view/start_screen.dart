@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:vending_machines/consts/app_colors.dart';
+import 'package:vending_machines/consts/app_text_styles/onboarding_text_style.dart';
 
 import '../../../blocs/onboarding_cubit/onboarding_cubit.dart';
 import '../../../consts/app_text_styles/settings_text_style.dart';
@@ -45,10 +46,22 @@ class _StartScreenState extends State<StartScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                height: size.height * 0.15,
+                height: size.height * 0.1,
               ),
-              Text('Let’s start'),
-              Text('How often do you track the number of products?'),
+              Text(
+                'Let’s start',
+                style: OnboardingTextStyle.introduction,
+              ),
+              SizedBox(
+                height: size.height * 0.015,
+              ),
+              Text(
+                'How often do you track the number of products?',
+                style: OnboardingTextStyle.description,
+              ),
+              SizedBox(
+                height: size.height * 0.01,
+              ),
               Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: Column(
@@ -125,19 +138,14 @@ class _StartScreenState extends State<StartScreen> {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(
-                      color: _isSelected[index] ? Colors.white : Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: OnboardingTextStyle.title,
                   ),
                   SizedBox(
                     height: size.width * 0.01,
                   ),
                   Text(
                     subtitle,
-                    style: TextStyle(
-                      color: _isSelected[index] ? Colors.white : Colors.black,
-                    ),
+                    style: OnboardingTextStyle.subtitle,
                   ),
                   SizedBox(
                     height: size.width * 0.01,

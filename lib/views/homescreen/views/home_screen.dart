@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vending_machines/views/app/widgets/chosen_action_button_widget.dart';
-import 'package:vending_machines/views/homescreen/views/product_screen.dart';
 import 'package:vending_machines/views/homescreen/widgets/banner_widget.dart';
 
 import '../../../blocs/vending_machine_cubit/vending_machine_cubit.dart';
@@ -50,21 +49,38 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Center(
                   child: Column(
                     children: [
-                      OperationBanner(),
+                      const OperationBanner(),
                       SizedBox(height: size.height * 0.08),
-                      Text('No vending machine data available.'),
-                      Spacer(),
-                      ChosenActionButton(
-                        text: 'Add Machines',
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (_) => const BasicInfoScreen()),
-                          );
-                        },
-                      ),
-                      SizedBox(height: size.height * 0.03),
+                      Expanded(
+                        child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.1),
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(15),
+                                topRight: Radius.circular(15),
+                              ),
+                            ),
+                            child: Column(children: [
+                              SizedBox(height: size.height * 0.1),
+                              Text(
+                                'No vending machine data available.',
+                                style: HomeScreenTextStyle.banner,
+                              ),
+                              Spacer(),
+                              ChosenActionButton(
+                                text: 'Add Machines',
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (_) =>
+                                            const BasicInfoScreen()),
+                                  );
+                                },
+                              ),
+                              SizedBox(height: size.height * 0.03),
+                            ])),
+                      )
                     ],
                   ),
                 );
@@ -72,7 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               return Column(
                 children: [
-                  OperationBanner(),
+                  const OperationBanner(),
                   SizedBox(height: size.height * 0.03),
                   Expanded(
                     child: Container(
@@ -85,46 +101,39 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       child: Column(children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  _showMachines = true;
-                                });
-                              },
-                              style: _showMachines
-                                  ? ElevatedButton.styleFrom(
-                                      primary: AppColors.greenColor)
-                                  : null,
-                              child: const Text('Machines'),
-                            ),
-                            const SizedBox(width: 16.0),
-                            ElevatedButton(
-                              onPressed: () {
-                                setState(() {
-                                  _showMachines = false;
-                                });
-                              },
-                              style: !_showMachines
-                                  ? ElevatedButton.styleFrom(
-                                      primary: AppColors.greenColor)
-                                  : null,
-                              child: const Text('Products'),
-                            ),
-                          ],
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ToggleButtons(
+                            borderRadius: BorderRadius.circular(20.0),
+                            selectedColor: Colors.white,
+                            fillColor: AppColors.greenColor,
+                            onPressed: (int newIndex) {
+                              setState(() {
+                                _showMachines = newIndex == 0;
+                              });
+                            },
+                            isSelected: [_showMachines, !_showMachines],
+                            children: const [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 55.0),
+                                child: Text('Machines',
+                                    style: HomeScreenTextStyle.products),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 55.0),
+                                child: Text('Products',
+                                    style: HomeScreenTextStyle.products),
+                              ),
+                            ],
+                          ),
                         ),
                         const SizedBox(height: 16.0),
                         Expanded(
-                          child: _showMachines
-                              ? _buildMachinesList(vendingMachinesList)
-                              : _buildProductsList(
-                                  context,
-                                  vendingMachinesList
-                                      .expand((machine) => machine.products)
-                                      .toList()),
-                        ),
+                            child: _showMachines
+                                ? _buildMachinesList(
+                                    context, vendingMachinesList)
+                                : _buildProductsList(
+                                    context, vendingMachinesList)),
                         ChosenActionButton(
                           text: 'Add Machines',
                           onTap: () {
@@ -146,82 +155,168 @@ class _HomeScreenState extends State<HomeScreen> {
         ));
   }
 
-  Widget _buildMachinesList(List<VendingMachine> vendingMachines) {
-    return ListView.builder(
-      itemCount: vendingMachines.length,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => MachineDetailsScreen(
-                    vendingMachine: vendingMachines[index],
-                    product: vendingMachines
-                        .expand((machine) => machine.products) as Product),
-              ),
-            );
-          },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
+  Widget _buildMachinesList(
+      BuildContext context, List<VendingMachine> machines) {
+    final size = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.all(6.0),
+      child: ListView.builder(
+        itemCount: machines.length,
+        itemBuilder: (context, index) {
+          final machine = machines[index];
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => MachineDetailsScreen(
+                    vendingMachine: machine,
+                  ),
+                ),
+              );
+            },
             child: Card(
-              color: Colors.white.withOpacity(0.25),
+              color: Colors.white.withOpacity(0.15),
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        Text(vendingMachines[index].name),
-                        const SizedBox(width: 8.0),
-                        Wrap(
-                          spacing: 8.0,
-                          children: vendingMachines[index]
-                              .machineTypes
-                              .map((type) =>
-                                  Chip(label: Text(type.name.toUpperCase())))
-                              .toList(),
-                        ),
+                        Text(machine.name, style: HomeScreenTextStyle.name),
+                        SizedBox(width: size.width * 0.03),
+                        ...machine.machineTypes.map((type) {
+                          return Container(
+                            margin: EdgeInsets.only(right: 8),
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: AppColors.greenColor.withOpacity(0.25),
+                            ),
+                            child: Text(
+                              type.toString().split('.').last,
+                              style: HomeScreenTextStyle.type,
+                            ),
+                          );
+                        }).toList(),
                       ],
                     ),
-                    Text(vendingMachines[index].location),
-                    const SizedBox(height: 8.0),
+                    Text(
+                      machine.location,
+                      style: HomeScreenTextStyle.location,
+                    ),
+                    SizedBox(height: size.width * 0.02),
+                    Text(
+                      'Products:',
+                      style: HomeScreenTextStyle.products,
+                    ),
+                    SizedBox(height: size.width * 0.015),
+                    ...machine.products.map((product) {
+                      return Container(
+                        margin: EdgeInsets.only(right: 12),
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.orange.withOpacity(0.25),
+                        ),
+                        child: Text(
+                          product.name,
+                          style: HomeScreenTextStyle.restock,
+                        ),
+                      );
+                    }).toList(),
                   ],
                 ),
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
-  Widget _buildProductsList(BuildContext context, List<Product> products) {
+  Widget _buildProductsList(
+      BuildContext context, List<VendingMachine> vendingMachinesList) {
+    final size = MediaQuery.of(context).size;
+    List<Product> allProducts =
+        vendingMachinesList.expand((machine) => machine.products).toList();
+
     return ListView.builder(
-      itemCount: products.length,
+      itemCount: allProducts.length,
       itemBuilder: (context, index) {
-        final product = products[index];
+        final product = allProducts[index];
+        final machine = vendingMachinesList
+            .firstWhere((machine) => machine.products.contains(product));
+        final machineType =
+            machine.machineTypes.first.toString().split('.').last;
+
         return GestureDetector(
           onTap: () {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => ProductScreen(product: product),
+                builder: (_) => MachineDetailsScreen(vendingMachine: machine),
               ),
             );
           },
           child: Card(
-            color: Colors.white.withOpacity(0.25),
+            color: Colors.white.withOpacity(0.15),
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(product.name),
-                  Text(product.price.toString()),
-                  Text(product.consumption),
-                  Text(product.consumptionPeriod.name),
+                  Row(
+                    children: [
+                      Text(
+                        product.name,
+                        style: HomeScreenTextStyle.name,
+                      ),
+                      SizedBox(width: size.width * 0.03),
+                      Container(
+                        padding: EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: AppColors.greenColor.withOpacity(0.25),
+                        ),
+                        child: Text(
+                          machineType,
+                          style: HomeScreenTextStyle.type,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: size.width * 0.03),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.orange.withOpacity(0.15),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Needs to be restocked  ${product.consumptionPeriod.toString().split('.').last}',
+                        style: HomeScreenTextStyle.restock,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: size.width * 0.02),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white.withOpacity(0.15),
+                    ),
+                    child: Center(
+                      child: Text(
+                        machine.name,
+                        style: HomeScreenTextStyle.location,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
