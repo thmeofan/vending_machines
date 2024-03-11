@@ -19,6 +19,8 @@ dependencies:
   flutter_inappwebview: ^6.0.0
   fancy_shimmer_image: ^2.0.3
   intl: ^0.19.0
+  firebase_core: ^2.27.0
+  firebase_remote_config: ^4.3.17
 
 dev_dependencies:
   flutter_test:

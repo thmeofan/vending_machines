@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vending_machines/views/app/widgets/chosen_action_button_widget.dart';
@@ -186,7 +187,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Row(
                       children: [
-                        Text(machine.name, style: HomeScreenTextStyle.name),
+                        Flexible(
+                          child: Text(
+                            machine.name,
+                            style: HomeScreenTextStyle.name,
+                            softWrap: false,
+                            overflow: TextOverflow.fade,
+                          ),
+                        ),
                         SizedBox(width: size.width * 0.03),
                         ...machine.machineTypes.map((type) {
                           return Container(
