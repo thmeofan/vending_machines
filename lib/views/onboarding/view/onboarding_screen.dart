@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../blocs/onboarding_cubit/onboarding_cubit.dart';
 import '../../../consts/app_text_styles/onboarding_text_style.dart';
 import '../../../util/app_routes.dart';
 import '../../app/widgets/chosen_action_button_widget.dart';
-import '../widgets/introduction_widget.dart';
 
 class OnboardingScreen extends StatefulWidget {
   final bool? isFirstTime;
@@ -20,18 +16,6 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  // void _onActionButtonTap() {
-  //   if (_current == 0) {
-  //     _carouselController.nextPage(
-  //       duration: Duration(milliseconds: 300),
-  //       curve: Curves.linear,
-  //     );
-  //   } else {
-  //     context.read<OnboardingCubit>().setFirstTime();
-  //     Navigator.pushReplacementNamed(context, AppRoutes.home);
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -62,7 +46,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: size.height * 0.55,
+                      height: size.height * 0.45,
                     ),
                     const Text(
                       'Welcome to Profitmate - your assistant in increasing the profitability of vending machines!',
@@ -72,7 +56,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       overflow: TextOverflow.visible,
                     ),
                     SizedBox(
-                      height: size.height * 0.025,
+                      height: size.height * 0.02,
                     ),
                     Text(
                       'Track, analyze, and optimize your business with our convenient app',

@@ -28,5 +28,4 @@ class VendingMachineCubit extends Cubit<List<VendingMachine>> {
     await _sharedPreferencesService.saveVendingMachines(updatedList);
   }
 
-// Modify other methods to work with a list of vending machines if necessary.
 }

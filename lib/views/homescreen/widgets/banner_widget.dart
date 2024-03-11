@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../../consts/app_colors.dart';
-import '../../../util/app_routes.dart';
-
-class OperationBanner extends StatelessWidget {
-  const OperationBanner({super.key});
+class MachineBanner extends StatelessWidget {
+  const MachineBanner({super.key});
 
   @override
   Widget build(BuildContext context) {

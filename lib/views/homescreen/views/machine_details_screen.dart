@@ -3,7 +3,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:vending_machines/consts/app_text_styles/home_screen_text_style.dart';
 import 'package:vending_machines/views/app/widgets/output_widget.dart';
 import 'package:vending_machines/views/homescreen/widgets/product_info_widget.dart';
-
 import '../../../consts/app_colors.dart';
 import '../../../consts/app_text_styles/constructor_text_style.dart';
 import '../../../data/model/vending_machine.dart';
@@ -49,7 +48,7 @@ class MachineDetailsScreen extends StatelessWidget {
               SizedBox(height: size.height * 0.015),
               Row(
                 children: [
-                  Text(
+                  const Text(
                     'Products:',
                     style: HomeScreenTextStyle.products,
                   ),
@@ -63,7 +62,7 @@ class MachineDetailsScreen extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       'Add more',
                       style: TextStyle(
                         color: AppColors.greenColor,
@@ -86,7 +85,6 @@ class MachineDetailsScreen extends StatelessWidget {
                   }).toList(),
                 ),
               ),
-              SizedBox(height: 20),
             ],
           ),
         ),

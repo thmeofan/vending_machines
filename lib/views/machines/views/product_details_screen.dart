@@ -118,10 +118,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: 16.0),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'Consumption Period:',
                     style: ConstructorTextStyle.title,
                   ),

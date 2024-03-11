@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:vending_machines/views/app/widgets/chosen_action_button_widget.dart';
 import 'package:vending_machines/views/homescreen/widgets/banner_widget.dart';
-
 import '../../../blocs/vending_machine_cubit/vending_machine_cubit.dart';
 import '../../../consts/app_colors.dart';
 import '../../../consts/app_text_styles/home_screen_text_style.dart';
 import '../../../data/model/vending_machine.dart';
 import '../../../util/app_routes.dart';
 import '../../machines/views/basic_info_screen.dart';
-import '../../machines/views/product_details_screen.dart';
 import 'machine_details_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -49,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 return Center(
                   child: Column(
                     children: [
-                      const OperationBanner(),
+                      const MachineBanner(),
                       SizedBox(height: size.height * 0.08),
                       Expanded(
                         child: Container(
@@ -62,11 +60,12 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             child: Column(children: [
                               SizedBox(height: size.height * 0.1),
-                              Text(
+                              const Text(
                                 'No vending machine data available.',
                                 style: HomeScreenTextStyle.banner,
+                                textAlign: TextAlign.center,
                               ),
-                              Spacer(),
+                              const Spacer(),
                               ChosenActionButton(
                                 text: 'Add Machines',
                                 onTap: () {
@@ -88,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
               return Column(
                 children: [
-                  const OperationBanner(),
+                  const MachineBanner(),
                   SizedBox(height: size.height * 0.03),
                   Expanded(
                     child: Container(
@@ -104,8 +103,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: ToggleButtons(
-                            borderRadius: BorderRadius.circular(20.0),
+                            borderRadius: BorderRadius.circular(10.0),
                             selectedColor: Colors.white,
+                            color: Colors.white.withOpacity(0.15),
                             fillColor: AppColors.greenColor,
                             onPressed: (int newIndex) {
                               setState(() {
@@ -113,15 +113,17 @@ class _HomeScreenState extends State<HomeScreen> {
                               });
                             },
                             isSelected: [_showMachines, !_showMachines],
-                            children: const [
+                            children: [
                               Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 55.0),
-                                child: Text('Machines',
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: size.width * 0.12),
+                                child: const Text('Machines',
                                     style: HomeScreenTextStyle.products),
                               ),
                               Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 55.0),
-                                child: Text('Products',
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: size.width * 0.12),
+                                child: const Text('Products',
                                     style: HomeScreenTextStyle.products),
                               ),
                             ],
@@ -207,25 +209,33 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: HomeScreenTextStyle.location,
                     ),
                     SizedBox(height: size.width * 0.02),
-                    Text(
+                    const Text(
                       'Products:',
                       style: HomeScreenTextStyle.products,
                     ),
                     SizedBox(height: size.width * 0.015),
-                    ...machine.products.map((product) {
-                      return Container(
-                        margin: EdgeInsets.only(right: 12),
-                        padding: EdgeInsets.all(8),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.orange.withOpacity(0.25),
-                        ),
-                        child: Text(
-                          product.name,
-                          style: HomeScreenTextStyle.restock,
-                        ),
-                      );
-                    }).toList(),
+                    Container(
+                      height: size.height * 0.05,
+                      child: ListView(
+                        scrollDirection: Axis.horizontal,
+                        children: machine.products.map((product) {
+                          return Container(
+                            margin: EdgeInsets.only(right: 12),
+                            padding: EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.orange.withOpacity(0.25),
+                            ),
+                            child: Center(
+                              child: Text(
+                                product.name,
+                                style: HomeScreenTextStyle.restock,
+                              ),
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    )
                   ],
                 ),
               ),

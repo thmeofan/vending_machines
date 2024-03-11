@@ -49,8 +49,6 @@ class _TypeScreenState extends State<TypeScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              //  const Text('Select machine types:'),
-              //   const SizedBox(height: 16.0),
               Column(
                 children: [
                   Row(

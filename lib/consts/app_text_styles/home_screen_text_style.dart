@@ -9,7 +9,6 @@ class HomeScreenTextStyle {
     fontWeight: FontWeight.w200,
     color: Colors.white,
   );
-
   static TextStyle address = TextStyle(
     fontFamily: 'Roboto',
     fontSize: 14.0,

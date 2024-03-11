@@ -27,9 +27,8 @@ class ChosenActionButton extends StatelessWidget {
           style: TextButton.styleFrom(
             backgroundColor: AppColors.greenColor,
             padding: const EdgeInsets.symmetric(vertical: 5),
-            //  minimumSize: Size(232, 56),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(15), // Border radius
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
           child: Text(

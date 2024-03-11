@@ -21,7 +21,7 @@ class OnboardingTextStyle {
   );
   static const TextStyle subtitle = TextStyle(
     fontFamily: 'Roboto',
-    fontSize: 14.0,
+    fontSize: 13.0,
     color: Colors.white,
     fontWeight: FontWeight.w300,
   );

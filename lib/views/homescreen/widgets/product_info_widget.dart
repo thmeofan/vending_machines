@@ -20,7 +20,7 @@ class ProductInfoWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: MediaQuery.of(context).size.height * 0.32,
       width: double.infinity,
       padding: EdgeInsets.all(16.0),
       decoration: BoxDecoration(
@@ -53,7 +53,7 @@ class ProductInfoWidget extends StatelessWidget {
           SizedBox(height: size.height * 0.015),
           Container(
               width: double.infinity,
-              height: size.height * 0.05,
+              height: size.height * 0.055,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 color: AppColors.greenColor.withOpacity(0.2),
@@ -95,7 +95,7 @@ class ProductInfoWidget extends StatelessWidget {
                         style: ConstructorTextStyle.inputText,
                       ),
                       SizedBox(
-                        height: size.height * 0.05,
+                        height: size.height * 0.045,
                       ),
                       Text('${_calculateRenewDate()}',
                           style: HomeScreenTextStyle.restock)
@@ -124,7 +124,7 @@ class ProductInfoWidget extends StatelessWidget {
                         style: ConstructorTextStyle.inputText,
                       ),
                       SizedBox(
-                        height: size.height * 0.05,
+                        height: size.height * 0.045,
                       ),
                       Text(
                         ' ${product.consumption}/week',

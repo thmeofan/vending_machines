@@ -24,9 +24,6 @@ class _BasicInfoScreenState extends State<BasicInfoScreen> {
   @override
   void initState() {
     super.initState();
-    final vendingMachine = context.read<VendingMachineCubit>().state;
-    // _nameController.text = vendingMachine?.name ?? '';
-    // _locationController.text = vendingMachine?.location ?? '';
   }
 
   void _clearControllers() {

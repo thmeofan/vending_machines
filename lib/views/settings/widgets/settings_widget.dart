@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../../consts/app_colors.dart';
 import '../../../consts/app_text_styles/settings_text_style.dart';
 
 class SettingsTile extends StatelessWidget {

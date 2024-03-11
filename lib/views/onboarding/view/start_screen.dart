@@ -63,27 +63,27 @@ class _StartScreenState extends State<StartScreen> {
                 height: size.height * 0.01,
               ),
               Padding(
-                padding: const EdgeInsets.all(4.0),
+                padding: const EdgeInsets.symmetric(vertical: 2.0),
                 child: Column(
                   children: [
                     Row(
                       children: [
                         Expanded(
                             child: _buildPeriodOption(
-                                "Daily", "4-7 days per week", 0)),
+                                "Daily", "4-7 days\nper week", 0)),
                         Expanded(
                             child: _buildPeriodOption(
-                                "Weekly", "1-3 days per week", 1)),
+                                "Weekly", "1-3 days\nper week", 1)),
                       ],
                     ),
                     Row(
                       children: [
                         Expanded(
                             child: _buildPeriodOption(
-                                "Monthly", "5-7 days per month", 2)),
+                                "Monthly", "5-7 days\nper month", 2)),
                         Expanded(
                             child: _buildPeriodOption(
-                                "Rarely", "1 day per month", 3)),
+                                "Rarely", "1 day per\nmonth", 3)),
                       ],
                     ),
                   ],
@@ -120,14 +120,14 @@ class _StartScreenState extends State<StartScreen> {
           });
         },
         child: Container(
-          height: size.height * 0.1,
+          height: size.height * 0.15,
           decoration: BoxDecoration(
             color: _isSelected[index]
                 ? AppColors.greenColor
                 : Colors.white.withOpacity(0.3),
             borderRadius: BorderRadius.circular(8.0),
           ),
-          padding: EdgeInsets.all(4.0),
+          padding: EdgeInsets.all(2.0),
           child: Row(
             children: [
               SizedBox(
@@ -146,6 +146,9 @@ class _StartScreenState extends State<StartScreen> {
                   Text(
                     subtitle,
                     style: OnboardingTextStyle.subtitle,
+                    // textAlign: TextAlign.start,
+                    softWrap: true,
+                    // overflow: TextOverflow.visible,
                   ),
                   SizedBox(
                     height: size.width * 0.01,

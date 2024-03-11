@@ -1,9 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../data/model/vending_machine.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:convert';
 
 class SharedPreferencesService {
   static const String _vendingMachinesKey = 'vending_machines';

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../consts/app_colors.dart';
 import '../../../consts/app_text_styles/constructor_text_style.dart';
-import '../../../consts/app_text_styles/settings_text_style.dart';
 import '../../app/views/my_in_app_web_view.dart';
 import '../widgets/settings_widget.dart';
 
@@ -53,13 +52,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               SizedBox(
                 height: size.height * 0.12,
               ),
-              // Padding(
-              //   padding: EdgeInsets.only(left: size.width * 0.015),
-              //   child: const Text(
-              //     'Settings',
-              //     style: SettingsTextStyle.title,
-              //   ),
-              // ),
               SizedBox(
                 height: size.height * 0.01,
               ),

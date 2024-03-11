@@ -26,23 +26,11 @@ class ConstructorTextStyle {
       fontWeight: FontWeight.w400,
       color: AppColors.greenColor);
 
-  static const TextStyle add = TextStyle(
-      fontFamily: 'Roboto',
-      fontSize: 16.0,
-      fontWeight: FontWeight.w300,
-      color: AppColors.greenColor);
-
   static const TextStyle lable = TextStyle(
     fontFamily: 'Roboto',
     fontSize: 16.0,
     fontWeight: FontWeight.w400,
     color: Colors.grey,
-  );
-  static TextStyle priority = TextStyle(
-    fontFamily: 'Roboto',
-    fontSize: 14.0,
-    fontWeight: FontWeight.w400,
-    color: Colors.white,
   );
   static TextStyle snackBar = TextStyle(
     fontFamily: 'Roboto',

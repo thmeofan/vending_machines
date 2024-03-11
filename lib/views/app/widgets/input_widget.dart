@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import '../../../consts/app_colors.dart';
 import '../../../consts/app_text_styles/constructor_text_style.dart';
 
 class InputWidget extends StatelessWidget {
@@ -17,9 +15,8 @@ class InputWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(20)),
-        // color: Colors.white.withOpacity(0.2),
       ),
       child: TextField(
         style: ConstructorTextStyle.inputText,
